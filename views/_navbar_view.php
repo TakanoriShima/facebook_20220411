@@ -11,8 +11,7 @@
     <div class="collapse navbar-collapse" id="nav-bar">
         <ul class="navbar-nav">
             <li class="nav-item"><a href="posts_create.php" class="nav-link">新規投稿</a></li>
-            <!--<li class="nav-item"><a href="users_show.php" class="nav-link">MyPage</a></li>-->
-            <li class="nav-item"><a href="posts_show.php?id=<?= $post->id ?>" class="nav-link">MyPage</a></li>
+            <li class="nav-item"><a href="mypage.php" class="nav-link">MyPage</a></li>
             <li class="nav-item"><a href="top.php" class="nav-link">投稿一覧</a></li>
             <li class="nav-item"><a href="logout.php" class="nav-link">ログアウト</a></li>
         </ul>

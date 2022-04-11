@@ -1,5 +1,5 @@
 <?php
-    require_once 'models/Model.php';
+    require_once 'models/Post.php';
     // モデル(M)
     // ユーザーの設計図
     class User extends Model{
@@ -138,6 +138,27 @@
                 
             }else{
                 return null;
+            }
+        }
+        
+        // 注目するユーザーが投稿した投稿一覧を取得
+        public function posts(){
+            try {
+                $pdo = self::get_connection();
+                $stmt = $pdo->prepare("SELECT * FROM posts WHERE user_id=:user_id");
+                // バインド処理
+                $stmt->bindParam(':user_id', $this->id, PDO::PARAM_INT);
+                // 実行
+                $stmt->execute();
+                // フェッチの結果を、Postクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Post');
+                $posts = $stmt->fetchAll();
+                self::close_connection($pdo, $stmt);
+                // Postクラスのインスタンス配列を返す
+                return $posts;
+                
+            } catch (PDOException $e) {
+                return 'PDO exception: ' . $e->getMessage();
             }
         }
     }
